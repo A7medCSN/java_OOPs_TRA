@@ -6,14 +6,46 @@ public class SchoolSystemWithOutUsingOOP {
     static List<HashMap<String, Object>> schools = new ArrayList<>();
 
     public static void main(String[] args) {
-        schools = getSchools();
-        System.out.println(schools);
-        retrieveMarksForStudentInSubject();
-        calculateAverageMarksForStudent();
+        mainMenu();
         scanner.close();
+
     }
 
-    public static List<HashMap<String, Object>> getSchools() {
+    public static void mainMenu() {
+        while (true) {
+            System.out.println("\nMain Menu:");
+            System.out.println("1- Add new school");
+            System.out.println("2- Print schools");
+            System.out.println("3- retrieve Marks For Student In Subject");
+            System.out.println("4- calculate Average Marks For Student");
+            System.out.println("5- Exit");
+            System.out.print("Choose an option (1-5): ");
+            int option = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (option) {
+                case 1:
+                    getSchools();
+                    break;
+                case 2:
+                    System.out.println(schools);
+                    break;
+                case 3:
+                    retrieveMarksForStudentInSubject();
+                    break;
+                case 4:
+                    calculateAverageMarksForStudent();
+                    break;
+                case 5:
+                    System.out.println("Exiting the system.");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please choose again.");
+            }
+        }
+    }
+
+    public static void getSchools() {
         List<HashMap<String, Object>> listOfSchools = new ArrayList<>();
         while (true) {
             System.out.println("Do you want to enter a new school? (yes/no)");
@@ -29,9 +61,10 @@ public class SchoolSystemWithOutUsingOOP {
             school.put("address", scanner.nextLine());
 
             school.put("Students", getStudents());
-            listOfSchools.add(school);
+            schools.add(school);
+            //listOfSchools.add(school);
         }
-        return listOfSchools;
+        //return listOfSchools;
     }
 
     public static List<HashMap<String, Object>> getStudents() {
@@ -46,13 +79,6 @@ public class SchoolSystemWithOutUsingOOP {
             HashMap<String, Object> student = new HashMap<>();
             System.out.println("Enter student name: ");
             student.put("student name", scanner.nextLine());
-            System.out.println("Enter student id: ");
-            student.put("student id", scanner.nextLine());
-            System.out.println("Enter student grade: ");
-            student.put("grade", scanner.nextLine());
-            System.out.println("Enter student age:");
-            student.put("age", scanner.nextShort());
-            scanner.nextLine();
 
             student.put("Subjects", getSubjects());
             listOfStudents.add(student);
@@ -72,11 +98,6 @@ public class SchoolSystemWithOutUsingOOP {
             HashMap<String, Object> subject = new HashMap<>();
             System.out.println("Enter subject name: ");
             subject.put("Subject Name", scanner.nextLine());
-            System.out.println("Enter teacher name: ");
-            subject.put("Teacher's Name", scanner.nextLine());
-            System.out.println("Enter credit hours: ");
-            subject.put("Credit Hours", scanner.nextShort());
-            scanner.nextLine();
 
             subject.put("Marks", getMarks());
             listOfSubjects.add(subject);
@@ -114,8 +135,8 @@ public class SchoolSystemWithOutUsingOOP {
 
             System.out.println("Enter school name:");
             String schoolName = scanner.nextLine();
-            System.out.println("Enter student ID:");
-            String studentID = scanner.nextLine();
+            System.out.println("Enter student name:");
+            String studentName = scanner.nextLine();
             System.out.println("Enter subject name:");
             String subjectName = scanner.nextLine();
 
@@ -124,13 +145,12 @@ public class SchoolSystemWithOutUsingOOP {
                 if (school.get("school name").equals(schoolName)) {
                     List<HashMap<String, Object>> students = (List<HashMap<String, Object>>) school.get("Students");
                     for (HashMap<String, Object> student : students) {
-                        if (student.get("student id").equals(studentID)) {
+                        if (student.get("student name").equals(studentName)) {
                             List<HashMap<String, Object>> subjects = (List<HashMap<String, Object>>) student.get("Subjects");
                             for (HashMap<String, Object> subject : subjects) {
                                 if (subject.get("Subject Name").equals(subjectName)) {
                                     List<HashMap<String, Object>> marks = (List<HashMap<String, Object>>) subject.get("Marks");
                                     System.out.println("Marks for " + subjectName + ": " + marks);
-                                    System.out.println("Grade: " + student.get("grade"));
                                     found = true;
                                     break;
                                 }
@@ -157,15 +177,15 @@ public class SchoolSystemWithOutUsingOOP {
 
             System.out.println("Enter school name:");
             String schoolName = scanner.nextLine();
-            System.out.println("Enter student ID:");
-            String studentID = scanner.nextLine();
+            System.out.println("Enter student name:");
+            String studentName = scanner.nextLine();
 
-            boolean isStudentInfoFounded = false;
+            boolean isStudentInfoFounded= false;
             for (HashMap<String, Object> school : schools) {
                 if (school.get("school name").equals(schoolName)) {
                     List<HashMap<String, Object>> students = (List<HashMap<String, Object>>) school.get("Students");
                     for (HashMap<String, Object> student : students) {
-                        if (student.get("student id").equals(studentID)) {
+                        if (student.get("student name").equals(studentName)) {
                             List<HashMap<String, Object>> subjects = (List<HashMap<String, Object>>) student.get("Subjects");
                             int totalMarks = 0;
                             int count = 0;
@@ -178,7 +198,7 @@ public class SchoolSystemWithOutUsingOOP {
                             }
                             if (count > 0) {
                                 double averageMarks = (double) totalMarks / count;
-                                System.out.println("Average Marks for student " + studentID + ": " + averageMarks);
+                                System.out.println("Average Marks for student " + studentName + ": " + averageMarks);
                             } else {
                                 System.out.println("No marks isStudentInfoFounded for the specified student.");
                             }
