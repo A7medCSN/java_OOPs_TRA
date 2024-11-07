@@ -17,8 +17,10 @@ public class SchoolServices {
 
         System.out.println("Enter School Address");
         school.address = scanner.nextLine();
-        //System.out.println("Enter School Library name");
-        //school.library = scanner.nextLine();
+
+        school.library = LibraryServices.getLibrary();
+        school.students = StudentServices.addStudents();
+        school.teachers = TeacherServices.addTeacher();
 
         return school;
     }

@@ -16,18 +16,20 @@ public class BookServices {
         book.name = scanner.nextLine();
         System.out.println("Enter book ID");
         book.id = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Enter book's author ");
         book.author = scanner.nextLine();
         System.out.println("Enter book's publishing year");
         book.yearOfPublishing = scanner.nextLine();
         System.out.println("is the book available? (true/false)");
         book.isAvailable=scanner.nextBoolean();
+        scanner.nextLine();
 
         return book;
 
     }
 
-    public static List<Book> addBooks() {
+    public static List<Book> addBook() {
         List<Book> books = new ArrayList<>();
         Boolean flag=true;
         while (flag) {
@@ -41,4 +43,5 @@ public class BookServices {
         }
         return books;
     }
+
 }

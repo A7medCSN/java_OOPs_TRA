@@ -20,6 +20,9 @@ public class StudentServices {
         student.grade = scanner.nextLine();
         System.out.println("Enter student age");
         student.age = scanner.nextShort();
+        scanner.nextLine();
+
+        student.courses=SubjectServices.addSubject();
 
         return student;
 

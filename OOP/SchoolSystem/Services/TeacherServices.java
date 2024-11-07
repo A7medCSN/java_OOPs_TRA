@@ -18,6 +18,9 @@ public class TeacherServices {
         teacher.id = scanner.nextLine();
         System.out.println("Enter Teacher's years of Experience ");
         teacher.yearsOfExperience=scanner.nextShort();
+        scanner.nextLine();
+
+        teacher.subjectsExpertiseList=SubjectServices.addSubject();
 
         return teacher;
 
@@ -27,7 +30,7 @@ public class TeacherServices {
         List<Teacher> teachers = new ArrayList<>();
         Boolean flag=true;
         while (flag) {
-            System.out.println("do want to add new school? (yes/no) ");
+            System.out.println("do want to add new teacher? (yes/no) ");
             String response=scanner.nextLine();
             if (response.equalsIgnoreCase("no")){
                 flag=false;

@@ -15,23 +15,35 @@ public class SubjectServices {
         System.out.println("Enter subject Name");
         subject.name = scanner.nextLine();
         System.out.println("Enter subject credits ");
-        subject.creditHours= scanner.nextShort();
-        return subject;
+        subject.creditHours = scanner.nextShort();
+        scanner.nextLine();
 
+        Boolean flag = true;
+        while (flag) {
+            System.out.println("is this subject for student? (yes/no)");
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flag = false;
+            } else {
+                subject.marks = MarkServices.addMark();
+               break;
+            }
+        }
+        return subject;
     }
 
     public static List<Subject> addSubject() {
         List<Subject> subjects = new ArrayList<>();
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
-            System.out.println("do want to add new school? (yes/no) ");
-            String response=scanner.nextLine();
-            if (response.equalsIgnoreCase("no")){
-                flag=false;
-            }
-            else{
+            System.out.println("do want to add new subject? (yes/no) ");
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flag = false;
+            } else {
                 subjects.add(SubjectServices.getSubject());
-            }}
+            }
+        }
         return subjects;
     }
 }
