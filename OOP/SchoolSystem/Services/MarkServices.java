@@ -44,6 +44,7 @@ public class MarkServices {
 
     public static void retrieveMarks(List<School> schools) {
 
+        System.out.println("retrieving marks for a student: ");
         System.out.println("enter school name: ");
         String schoolName = scanner.nextLine();
         System.out.println("enter student name: ");
