@@ -17,10 +17,10 @@ public class TeacherServices {
         System.out.println("Enter Teacher ID");
         teacher.id = scanner.nextLine();
         System.out.println("Enter Teacher's years of Experience ");
-        teacher.yearsOfExperience=scanner.nextShort();
+        teacher.yearsOfExperience = scanner.nextShort();
         scanner.nextLine();
 
-        teacher.subjectsExpertiseList=SubjectServices.addSubject();
+        teacher.subjectsExpertiseList = SubjectServices.addSubject();
 
         return teacher;
 
@@ -28,16 +28,16 @@ public class TeacherServices {
 
     public static List<Teacher> addTeacher() {
         List<Teacher> teachers = new ArrayList<>();
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             System.out.println("do want to add new teacher? (yes/no) ");
-            String response=scanner.nextLine();
-            if (response.equalsIgnoreCase("no")){
-                flag=false;
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flag = false;
+            } else {
+                teachers.add(TeacherServices.getTeacher());
             }
-            else{
-            teachers.add(TeacherServices.getTeacher());
-        }}
+        }
         return teachers;
     }
 }

@@ -22,7 +22,7 @@ public class BookServices {
         System.out.println("Enter book's publishing year");
         book.yearOfPublishing = scanner.nextLine();
         System.out.println("is the book available? (true/false)");
-        book.isAvailable=scanner.nextBoolean();
+        book.isAvailable = scanner.nextBoolean();
         scanner.nextLine();
 
         return book;
@@ -31,12 +31,12 @@ public class BookServices {
 
     public static List<Book> addBook() {
         List<Book> books = new ArrayList<>();
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             System.out.println("do want to add new book? (yes/no) ");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
-                flag=false;
+                flag = false;
             } else {
                 books.add(BookServices.getBook());
             }

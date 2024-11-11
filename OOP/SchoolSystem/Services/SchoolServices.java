@@ -2,9 +2,7 @@ package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class SchoolServices {
     static Scanner scanner = new Scanner(System.in);
@@ -27,30 +25,26 @@ public class SchoolServices {
 
     public static List<School> addSchools() {
         List<School> schools = new ArrayList<>();
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             System.out.println("do want to add new school? (yes/no) ");
-            String response=scanner.nextLine();
-            if (response.equalsIgnoreCase("no")){
-                flag=false;
-            }
-            else {
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flag = false;
+            } else {
                 schools.add(SchoolServices.getSchool());
             }
         }
         return schools;
     }
-
     public static void printAllSchoolDetails(List<School> schools) {
         if (schools.isEmpty()) {
             System.out.println("No schools available.");
             return;
         }
-
         for (School school : schools) {
             System.out.println("\nSchool Name: " + school.name);
             System.out.println("Address: " + school.address);
-
             // Library details
             System.out.println("Library:");
             if (school.library != null && school.library.books != null) {
@@ -60,7 +54,6 @@ public class SchoolServices {
             } else {
                 System.out.println("  No books available.");
             }
-
             // Teachers details
             System.out.println("Teachers:");
             if (school.teachers != null) {
@@ -70,18 +63,15 @@ public class SchoolServices {
             } else {
                 System.out.println("  No teachers available.");
             }
-
             // Students and their subjects and marks
             System.out.println("Students:");
             if (school.students != null) {
                 for (Student student : school.students) {
                     System.out.println("  Student Name: " + student.name);
-
                     // Subjects and marks for each student
                     if (student.courses != null) {
                         for (Subject subject : student.courses) {
                             System.out.println("    Subject Name: " + subject.name);
-
                             if (subject.marks != null) {
                                 for (Mark mark : subject.marks) {
                                     System.out.println("      Test: " + mark.description + ", Score: " + mark.marks+ ", Grade: " + mark.grade);
@@ -99,7 +89,5 @@ public class SchoolServices {
             }
         }
     }
-
-
 
 }

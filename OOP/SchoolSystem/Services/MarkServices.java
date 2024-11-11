@@ -43,7 +43,15 @@ public class MarkServices {
     }
 
     public static void retrieveMarks(List<School> schools) {
+        Boolean flage=true;
+        while (flage){
+            System.out.println("Do you want to retrieve mark for a student? (yes/no)");
+            String response=scanner.nextLine();
+            if (response.equalsIgnoreCase("no")){
+                flage=false;
+            }
 
+        else{
         System.out.println("retrieving marks for a student: ");
         System.out.println("enter school name: ");
         String schoolName = scanner.nextLine();
@@ -75,9 +83,18 @@ public class MarkServices {
             }
         }
         System.out.println("School not found.");
-    }
+    }}}
 
     public static void calculateAverageMarkForStudent(List<School> schools) {
+
+        Boolean flage=true;
+        while (flage){
+            System.out.println("Do you want to calculate average mark for a student? (yes/no)");
+            String response=scanner.nextLine();
+            if (response.equalsIgnoreCase("no")){
+                flage=false;
+            }
+            else{
         System.out.println("Enter school name: ");
         String schoolName = scanner.nextLine();
         System.out.println("Enter student name: ");
@@ -117,8 +134,7 @@ public class MarkServices {
             }
         }
         System.out.println("School not found.");
-    }
-
+    }}}
 
 
 }

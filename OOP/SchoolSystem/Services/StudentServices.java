@@ -22,7 +22,7 @@ public class StudentServices {
         student.age = scanner.nextShort();
         scanner.nextLine();
 
-        student.courses=SubjectServices.addSubject();
+        student.courses = SubjectServices.addSubject();
 
         return student;
 
@@ -30,12 +30,12 @@ public class StudentServices {
 
     public static List<Student> addStudents() {
         List<Student> students = new ArrayList<>();
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             System.out.println("do want to add new student? (yes/no) ");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
-                flag=false;
+                flag = false;
             } else {
                 students.add(StudentServices.getStudent());
             }

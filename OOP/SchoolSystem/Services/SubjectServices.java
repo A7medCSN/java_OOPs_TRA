@@ -26,7 +26,7 @@ public class SubjectServices {
                 flag = false;
             } else {
                 subject.marks = MarkServices.addMark();
-               break;
+                break;
             }
         }
         return subject;

@@ -10,11 +10,12 @@ import java.util.List;
 
 public class SchoolSystemDriver {
 
-    public static void main(String[] args){
-        List<School> schoolSystem= SchoolServices.addSchools();
-       //MarkServices.retrieveMarks(schoolSystem);
-        LibraryServices.bookManagement(schoolSystem);
+    public static void main(String[] args) {
+        List<School> schoolSystem = SchoolServices.addSchools();
         SchoolServices.printAllSchoolDetails(schoolSystem);
+        MarkServices.retrieveMarks(schoolSystem);
+        MarkServices.calculateAverageMarkForStudent(schoolSystem);
+        LibraryServices.bookManagement(schoolSystem);
 
     }
 }

@@ -7,4 +7,12 @@ public class Subject {
     public Short creditHours;
     public List<Mark> marks;
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                ", creditHours=" + creditHours +
+                ", marks=" + marks +
+                '}';
+    }
 }

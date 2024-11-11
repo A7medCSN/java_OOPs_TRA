@@ -17,7 +17,7 @@ public class LibraryServices {
         System.out.println("Enter library name: ");
         library.name = scanner.nextLine();
 
-        library.books=BookServices.addBook();
+        library.books = BookServices.addBook();
 
         return library;
     }
