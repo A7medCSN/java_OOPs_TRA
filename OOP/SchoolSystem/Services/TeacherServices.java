@@ -9,18 +9,18 @@ import java.util.Scanner;
 public class TeacherServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Teacher getTeacher() {
+    public static Teacher enterNewTeacher() {
 
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher Name");
-        teacher.name = scanner.nextLine();
+        teacher.setName(scanner.nextLine());
         System.out.println("Enter Teacher ID");
-        teacher.id = scanner.nextLine();
+        teacher.setId(scanner.nextLine());
         System.out.println("Enter Teacher's years of Experience ");
-        teacher.yearsOfExperience = scanner.nextShort();
+        teacher.setYearsOfExperience(scanner.nextShort());
         scanner.nextLine();
 
-        teacher.subjectsExpertiseList = SubjectServices.addSubject();
+        teacher.setSubjectsExpertiseList(SubjectServices.addSubject());
 
         return teacher;
 
@@ -34,8 +34,11 @@ public class TeacherServices {
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
-            } else {
-                teachers.add(TeacherServices.getTeacher());
+            } else if (response.equalsIgnoreCase("yes")) {
+                teachers.add(TeacherServices.enterNewTeacher());
+            }
+            else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
         return teachers;

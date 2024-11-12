@@ -1,8 +1,33 @@
 package OOP.SchoolSystem.Entities;
 
 public class Mark {
-    public Float marks;
-    public String grade;
+    private Float marks;
+    private String grade;
+    private String description;
+
+    public Float getMarks() {
+        return marks;
+    }
+
+    public void setMarks(Float marks) {
+        this.marks = marks;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
@@ -12,6 +37,4 @@ public class Mark {
                 ", description='" + description + '\'' +
                 '}';
     }
-
-    public String description;
 }

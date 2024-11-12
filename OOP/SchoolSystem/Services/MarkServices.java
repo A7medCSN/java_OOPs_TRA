@@ -12,17 +12,16 @@ import java.util.Scanner;
 public class MarkServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Mark getMark() {
+    public static Mark enterMark() {
 
         Mark mark = new Mark();
-        System.out.println("Enter mark ");
-        mark.marks = scanner.nextFloat();
+        System.out.println("Enter mark: ");
+        mark.setMarks(scanner.nextFloat());
         scanner.nextLine();
-        System.out.println("Enter grade ");
-        mark.grade = scanner.nextLine();
-
-        System.out.println("Enter description ");
-        mark.description = scanner.nextLine();
+        System.out.println("Enter grade: ");
+        mark.setGrade(scanner.nextLine());
+        System.out.println("Enter description: ");
+        mark.setDescription(scanner.nextLine());
         return mark;
 
     }
@@ -35,106 +34,114 @@ public class MarkServices {
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
+            } else if (response.equalsIgnoreCase("yes")) {
+                marks.add(MarkServices.enterMark());
             } else {
-                marks.add(MarkServices.getMark());
+                System.out.println("Invalid Input. Please try again.");
             }
+
         }
         return marks;
     }
 
     public static void retrieveMarks(List<School> schools) {
-        Boolean flage=true;
-        while (flage){
+        Boolean flage = true;
+        while (flage) {
             System.out.println("Do you want to retrieve mark for a student? (yes/no)");
-            String response=scanner.nextLine();
-            if (response.equalsIgnoreCase("no")){
-                flage=false;
-            }
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flage = false;
+            } else if (response.equalsIgnoreCase("yes")) {
+                System.out.println("retrieving marks for a student: ");
+                System.out.println("enter school name: ");
+                String schoolName = scanner.nextLine();
+                System.out.println("enter student name: ");
+                String studentName = scanner.nextLine();
+                System.out.println("enter subject name: ");
+                String subjectName = scanner.nextLine();
 
-        else{
-        System.out.println("retrieving marks for a student: ");
-        System.out.println("enter school name: ");
-        String schoolName = scanner.nextLine();
-        System.out.println("enter student name: ");
-        String studentName = scanner.nextLine();
-        System.out.println("enter subject name: ");
-        String subjectName = scanner.nextLine();
-
-        for (School school : schools) {
-            if (school.name.equalsIgnoreCase(schoolName)) {
-                for (Student student : school.students) {
-                    if (student.name.equalsIgnoreCase(studentName)) {
-                        for (Subject subject : student.courses) {
-                            if (subject.name.equalsIgnoreCase(subjectName)) {
-                                System.out.println("Marks for " + studentName + " in " + schoolName + ":");
-                                for (Mark mark : subject.marks) {
-                                    System.out.println("Mark: " + mark.marks
-                                            + ", Grade: " + mark.grade + ", Description: " + mark.description);
+                for (School school : schools) {
+                    if (school.getName().equalsIgnoreCase(schoolName)) {
+                        for (Student student : school.getStudents()) {
+                            if (student.getName().equalsIgnoreCase(studentName)) {
+                                for (Subject subject : student.getCourses()) {
+                                    if (subject.getName().equalsIgnoreCase(subjectName)) {
+                                        System.out.println("Marks for " + studentName + " in " + schoolName + ":");
+                                        for (Mark mark : subject.getMarks()) {
+                                            System.out.println("Mark: " + mark.getMarks()
+                                                    + ", Grade: " + mark.getGrade() + ", Description: " + mark.getDescription());
+                                        }
+                                        return;
+                                    }
                                 }
+                                System.out.println("Subject not found.");
                                 return;
                             }
                         }
-                        System.out.println("Subject not found.");
+                        System.out.println("Student not found.");
                         return;
                     }
                 }
-                System.out.println("Student not found.");
-                return;
+                System.out.println("School not found.");
+            } else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
-        System.out.println("School not found.");
-    }}}
+    }
 
     public static void calculateAverageMarkForStudent(List<School> schools) {
 
-        Boolean flage=true;
-        while (flage){
+        Boolean flage = true;
+        while (flage) {
             System.out.println("Do you want to calculate average mark for a student? (yes/no)");
-            String response=scanner.nextLine();
-            if (response.equalsIgnoreCase("no")){
-                flage=false;
-            }
-            else{
-        System.out.println("Enter school name: ");
-        String schoolName = scanner.nextLine();
-        System.out.println("Enter student name: ");
-        String studentName = scanner.nextLine();
-        System.out.println("Enter subject name: ");
-        String subjectName = scanner.nextLine();
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("no")) {
+                flage = false;
+            } else if (response.equalsIgnoreCase("yes")) {
+                System.out.println("Enter school name: ");
+                String schoolName = scanner.nextLine();
+                System.out.println("Enter student name: ");
+                String studentName = scanner.nextLine();
+                System.out.println("Enter subject name: ");
+                String subjectName = scanner.nextLine();
 
-        for (School school : schools) {
-            if (school.name.equalsIgnoreCase(schoolName)) {
-                for (Student student : school.students) {
-                    if (student.name.equalsIgnoreCase(studentName)) {
-                        for (Subject subject : student.courses) {
-                            if (subject.name.equalsIgnoreCase(subjectName)) {
-                                double totalMarks = 0;
-                                int markCount = 0;
+                for (School school : schools) {
+                    if (school.getName().equalsIgnoreCase(schoolName)) {
+                        for (Student student : school.getStudents()) {
+                            if (student.getName().equalsIgnoreCase(studentName)) {
+                                for (Subject subject : student.getCourses()) {
+                                    if (subject.getName().equalsIgnoreCase(subjectName)) {
+                                        double totalMarks = 0;
+                                        int markCount = 0;
 
-                                for (Mark mark : subject.marks) {
-                                    totalMarks += mark.marks;
-                                    markCount++;
+                                        for (Mark mark : subject.getMarks()) {
+                                            totalMarks += mark.getMarks();
+                                            markCount++;
+                                        }
+
+                                        if (markCount > 0) {
+                                            double averageMark = totalMarks / markCount;
+                                            System.out.println("Average mark for " + studentName + " in " + subjectName + " at " + schoolName + ": " + averageMark);
+                                        } else {
+                                            System.out.println("No marks available for " + subjectName);
+                                        }
+                                        return;
+                                    }
                                 }
-
-                                if (markCount > 0) {
-                                    double averageMark = totalMarks / markCount;
-                                    System.out.println("Average mark for " + studentName + " in " + subjectName + " at " + schoolName + ": " + averageMark);
-                                } else {
-                                    System.out.println("No marks available for " + subjectName);
-                                }
+                                System.out.println("Subject not found.");
                                 return;
                             }
                         }
-                        System.out.println("Subject not found.");
+                        System.out.println("Student not found.");
                         return;
                     }
                 }
-                System.out.println("Student not found.");
-                return;
+                System.out.println("School not found.");
+            } else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
-        System.out.println("School not found.");
-    }}}
+    }
 
 
 }

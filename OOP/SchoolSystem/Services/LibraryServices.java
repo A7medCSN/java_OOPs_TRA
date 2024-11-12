@@ -12,12 +12,11 @@ import java.util.Scanner;
 public class LibraryServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Library getLibrary() {
+    public static Library createLibrary() {
         Library library = new Library();
         System.out.println("Enter library name: ");
-        library.name = scanner.nextLine();
-
-        library.books = BookServices.addBook();
+        library.setName(scanner.nextLine());
+        library.setBooks(BookServices.addBook());
 
         return library;
     }
@@ -32,7 +31,7 @@ public class LibraryServices {
             System.out.print("Choose an option (1-4): ");
 
             int option = scanner.nextInt();
-            scanner.nextLine(); // Clear the newline
+            scanner.nextLine();
 
             switch (option) {
                 case 1:
@@ -53,7 +52,6 @@ public class LibraryServices {
         }
     }
 
-    // Method to assign a book to a student
     public static void assignBookToStudent(List<School> schools) {
         System.out.println("Enter school name:");
         String schoolName = scanner.nextLine();
@@ -64,13 +62,13 @@ public class LibraryServices {
 
         boolean isAssigned = false;
         for (School school : schools) {
-            if (school.name.equals(schoolName)) {
-                for (Student student : school.students) {
-                    if (student.name.equals(studentName)) {
-                        for (Book book : school.library.books) {
-                            if (book.name.equals(bookName) && book.isAvailable) {
-                                student.assignedBooks.add(book);
-                                book.isAvailable = false;
+            if (school.getName().equals(schoolName)) {
+                for (Student student : school.getStudents()) {
+                    if (student.getName().equals(studentName)) {
+                        for (Book book : school.getLibrary().getBooks()) {
+                            if (book.getName().equals(bookName) && book.getAvailable()) {
+                                student.getAssignedBooks().add(book);
+                                book.setAvailable(false);
                                 System.out.println("Book '" + bookName + "' has been assigned to " + studentName + ".");
                                 isAssigned = true;
                                 break;
@@ -98,13 +96,13 @@ public class LibraryServices {
 
         boolean isReturned = false;
         for (School school : schools) {
-            if (school.name.equals(schoolName)) {
-                for (Student student : school.students) {
-                    if (student.name.equals(studentName)) {
-                        for (Book book : student.assignedBooks) {
-                            if (book.name.equals(bookName)) {
-                                book.isAvailable = true;
-                                student.assignedBooks.remove(book);
+            if (school.getName().equals(schoolName)) {
+                for (Student student : school.getStudents()) {
+                    if (student.getName().equals(studentName)) {
+                        for (Book book : student.getAssignedBooks()) {
+                            if (book.getName().equals(bookName)) {
+                                book.setAvailable(true);
+                                student.getAssignedBooks().remove(book);
                                 System.out.println("Book '" + bookName + "' has been returned by " + studentName + ".");
                                 isReturned = true;
                                 break;
@@ -130,12 +128,12 @@ public class LibraryServices {
 
         boolean studentFound = false;
         for (School school : schools) {
-            if (school.name.equals(schoolName)) {
-                for (Student student : school.students) {
-                    if (student.name.equals(studentName)) {
+            if (school.getName().equals(schoolName)) {
+                for (Student student : school.getStudents()) {
+                    if (student.getName().equals(studentName)) {
                         System.out.println("Books assigned to " + studentName + ":");
-                        for (Book book : student.assignedBooks) {
-                            System.out.println("- " + book.name);
+                        for (Book book : student.getAssignedBooks()) {
+                            System.out.println("- " + book.getName());
                         }
                         studentFound = true;
                         break;

@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class SubjectServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Subject getSubject() {
+    public static Subject enterNewSubject() {
 
         Subject subject = new Subject();
         System.out.println("Enter subject Name");
-        subject.name = scanner.nextLine();
+        subject.setName(scanner.nextLine());
         System.out.println("Enter subject credits ");
-        subject.creditHours = scanner.nextShort();
+        subject.setCreditHours(scanner.nextShort());
         scanner.nextLine();
 
         Boolean flag = true;
@@ -24,9 +24,12 @@ public class SubjectServices {
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
-            } else {
-                subject.marks = MarkServices.addMark();
+            } else if (response.equalsIgnoreCase("yes")) {
+                subject.setMarks(MarkServices.addMark());
                 break;
+            }
+            else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
         return subject;
@@ -40,8 +43,11 @@ public class SubjectServices {
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
-            } else {
-                subjects.add(SubjectServices.getSubject());
+            } else if (response.equalsIgnoreCase("yes")) {
+                subjects.add(SubjectServices.enterNewSubject());
+            }
+            else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
         return subjects;

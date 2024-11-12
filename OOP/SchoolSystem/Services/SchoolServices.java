@@ -7,18 +7,18 @@ import java.util.*;
 public class SchoolServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static School getSchool() {
+    public static School createSchool() {
 
         School school = new School();
-        System.out.println("Enter School Name");
-        school.name = scanner.nextLine();
+        System.out.println("Enter School Name:");
+        school.setName(scanner.nextLine());
 
-        System.out.println("Enter School Address");
-        school.address = scanner.nextLine();
+        System.out.println("Enter School Address:");
+        school.setAddress(scanner.nextLine());
 
-        school.library = LibraryServices.getLibrary();
-        school.students = StudentServices.addStudents();
-        school.teachers = TeacherServices.addTeacher();
+        school.setLibrary(LibraryServices.createLibrary());
+        school.setStudents(StudentServices.addStudents());
+        school.setTeachers(TeacherServices.addTeacher());
 
         return school;
     }
@@ -27,12 +27,15 @@ public class SchoolServices {
         List<School> schools = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
-            System.out.println("do want to add new school? (yes/no) ");
+            System.out.println("do want to add new school? (yes/no): ");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
-            } else {
-                schools.add(SchoolServices.getSchool());
+            } else if (response.equalsIgnoreCase("yes")) {
+                schools.add(SchoolServices.createSchool());
+            }
+            else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
         return schools;
@@ -43,38 +46,38 @@ public class SchoolServices {
             return;
         }
         for (School school : schools) {
-            System.out.println("\nSchool Name: " + school.name);
-            System.out.println("Address: " + school.address);
+            System.out.println("\nSchool Name: " + school.getName());
+            System.out.println("Address: " + school.getAddress());
             // Library details
             System.out.println("Library:");
-            if (school.library != null && school.library.books != null) {
-                for (Book book : school.library.books) {
-                    System.out.println("  Book Title: " + book.name + ", Author: " + book.author);
+            if (school.getLibrary() != null && school.getLibrary().getBooks() != null) {
+                for (Book book : school.getLibrary().getBooks()) {
+                    System.out.println("  Book Title: " + book.getName() + ", Author: " + book.getAuthor());
                 }
             } else {
                 System.out.println("  No books available.");
             }
-            // Teachers details
+
             System.out.println("Teachers:");
-            if (school.teachers != null) {
-                for (Teacher teacher : school.teachers) {
-                    System.out.println("  Teacher Name: " + teacher.name + ", Subjects: " + teacher.subjectsExpertiseList);
+            if (school.getTeachers() != null) {
+                for (Teacher teacher : school.getTeachers()) {
+                    System.out.println("  Teacher Name: " + teacher.getName() + ", Subjects: " + teacher.getSubjectsExpertiseList());
                 }
             } else {
                 System.out.println("  No teachers available.");
             }
-            // Students and their subjects and marks
+
             System.out.println("Students:");
-            if (school.students != null) {
-                for (Student student : school.students) {
-                    System.out.println("  Student Name: " + student.name);
-                    // Subjects and marks for each student
-                    if (student.courses != null) {
-                        for (Subject subject : student.courses) {
-                            System.out.println("    Subject Name: " + subject.name);
-                            if (subject.marks != null) {
-                                for (Mark mark : subject.marks) {
-                                    System.out.println("      Test: " + mark.description + ", Score: " + mark.marks+ ", Grade: " + mark.grade);
+            if (school.getStudents() != null) {
+                for (Student student : school.getStudents()) {
+                    System.out.println("  Student Name: " + student.getName());
+
+                    if (student.getCourses() != null) {
+                        for (Subject subject : student.getCourses()) {
+                            System.out.println("    Subject Name: " + subject.getName());
+                            if (subject.getMarks() != null) {
+                                for (Mark mark : subject.getMarks()) {
+                                    System.out.println("      Test: " + mark.getDescription() + ", Score: " + mark.getMarks()+ ", Grade: " + mark.getGrade());
                                 }
                             } else {
                                 System.out.println("      No marks available.");

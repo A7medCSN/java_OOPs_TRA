@@ -1,12 +1,12 @@
 package OOP.SchoolSystem.Entities;
 
-import java.util.Date;
 
 public class Book {
-    public String name;
-    public String author;
-    public Integer id;
-    public String yearOfPublishing;
+    private String name;
+    private String author;
+    private Integer id;
+    private String yearOfPublishing;
+    private Boolean isAvailable;
 
     @Override
     public String toString() {
@@ -19,6 +19,45 @@ public class Book {
                 '}';
     }
 
-    public Boolean isAvailable;
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        if (!name.isBlank() && !name.isEmpty()){
+            this.name = name;}
+        else System.out.println("entered name is empty or blank");
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getYearOfPublishing() {
+        return yearOfPublishing;
+    }
+
+    public void setYearOfPublishing(String yearOfPublishing) {
+        this.yearOfPublishing = yearOfPublishing;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
 }

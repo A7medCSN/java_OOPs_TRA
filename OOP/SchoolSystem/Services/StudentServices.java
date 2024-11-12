@@ -9,20 +9,20 @@ import java.util.Scanner;
 public class StudentServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Student getStudent() {
+    public static Student enterNewStudent() {
 
         Student student = new Student();
-        System.out.println("Enter Student Name");
-        student.name = scanner.nextLine();
-        System.out.println("Enter Student ID");
-        student.id = scanner.nextLine();
-        System.out.println("Enter Student grade");
-        student.grade = scanner.nextLine();
-        System.out.println("Enter student age");
-        student.age = scanner.nextShort();
+        System.out.println("Enter Student Name:");
+        student.setName(scanner.nextLine());
+        System.out.println("Enter Student ID:");
+        student.setId(scanner.nextLine());
+        System.out.println("Enter Student grade:");
+        student.setGrade(scanner.nextLine());
+        System.out.println("Enter student age:");
+        student.setAge(scanner.nextShort());
         scanner.nextLine();
 
-        student.courses = SubjectServices.addSubject();
+        student.setCourses(SubjectServices.addSubject());
 
         return student;
 
@@ -36,9 +36,12 @@ public class StudentServices {
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
+            } else if (response.equalsIgnoreCase("yes")) {
+                students.add(StudentServices.enterNewStudent());
             } else {
-                students.add(StudentServices.getStudent());
+                System.out.println("Invalid Input. Please try again.");
             }
+
         }
         return students;
     }

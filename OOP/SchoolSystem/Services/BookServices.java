@@ -9,20 +9,23 @@ import java.util.Scanner;
 public class BookServices {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Book getBook() {
+    public static Book putNewBook() {
 
         Book book = new Book();
-        System.out.println("Enter book Name");
-        book.name = scanner.nextLine();
-        System.out.println("Enter book ID");
-        book.id = scanner.nextInt();
+        System.out.println("Enter book Name:");
+        book.setName(scanner.nextLine());
+        System.out.println("Enter book ID:");
+        Integer bookID = scanner.nextInt();
+        book.setId(bookID);
         scanner.nextLine();
-        System.out.println("Enter book's author ");
-        book.author = scanner.nextLine();
-        System.out.println("Enter book's publishing year");
-        book.yearOfPublishing = scanner.nextLine();
-        System.out.println("is the book available? (true/false)");
-        book.isAvailable = scanner.nextBoolean();
+        System.out.println("Enter book's author:");
+        String authorName = scanner.nextLine();
+        book.setAuthor(authorName);
+
+        System.out.println("Enter book's publishing year:");
+        book.setYearOfPublishing(scanner.nextLine());
+        System.out.println("is the book available? (true/false):");
+        book.setAvailable(scanner.nextBoolean());
         scanner.nextLine();
 
         return book;
@@ -33,12 +36,15 @@ public class BookServices {
         List<Book> books = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
-            System.out.println("do want to add new book? (yes/no) ");
+            System.out.println("do want to add new book? (yes/no): ");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
-            } else {
-                books.add(BookServices.getBook());
+            } else if(response.equalsIgnoreCase("yes")) {
+                books.add(BookServices.putNewBook());
+            }
+            else {
+                System.out.println("Invalid Input. Please try again.");
             }
         }
         return books;
