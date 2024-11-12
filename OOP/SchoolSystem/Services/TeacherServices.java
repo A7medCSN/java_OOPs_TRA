@@ -1,6 +1,7 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.Teacher;
+import OOP.SchoolSystem.Entities.School;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +43,37 @@ public class TeacherServices {
             }
         }
         return teachers;
+    }
+
+    public static void addTeacherToSpecificSchool(List<School> schoolSystem) {
+        if (schoolSystem.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
+        System.out.println("Enter the name of the school to add a teacher:");
+        String schoolName = scanner.nextLine();
+
+        // Find the school by name
+        School selectedSchool = null;
+        for (School school : schoolSystem) {
+            if (school.getName().equalsIgnoreCase(schoolName)) {
+                selectedSchool = school;
+                break;
+            }
+        }
+
+        if (selectedSchool == null) {
+            System.out.println("School not found. Please ensure the school exists.");
+            return;
+        }
+
+        // Add a new teacher to the selected school
+        Teacher newTeacher = enterNewTeacher();
+        if (selectedSchool.getTeachers() == null) {
+            selectedSchool.setTeachers(new ArrayList<>());
+        }
+        selectedSchool.getTeachers().add(newTeacher);
+        System.out.println("Teacher added successfully to " + schoolName);
     }
 }

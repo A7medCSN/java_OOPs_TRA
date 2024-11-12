@@ -49,10 +49,13 @@ public class SchoolServices {
             System.out.println("\nSchool Name: " + school.getName());
             System.out.println("Address: " + school.getAddress());
             // Library details
-            System.out.println("Library:");
+            System.out.println("Library name: "+school.getLibrary().getName());
             if (school.getLibrary() != null && school.getLibrary().getBooks() != null) {
+                System.out.println("Available Books at Library: ");
                 for (Book book : school.getLibrary().getBooks()) {
-                    System.out.println("  Book Title: " + book.getName() + ", Author: " + book.getAuthor());
+                    System.out.println("  Book Title: " + book.getName() + ", BookID: " + book.getId()
+                            + ", Author: " + book.getAuthor()+ ", Year of publishing: "
+                            + book.getYearOfPublishing()+ ", is available?: " + book.getAvailable());
                 }
             } else {
                 System.out.println("  No books available.");
@@ -61,7 +64,8 @@ public class SchoolServices {
             System.out.println("Teachers:");
             if (school.getTeachers() != null) {
                 for (Teacher teacher : school.getTeachers()) {
-                    System.out.println("  Teacher Name: " + teacher.getName() + ", Subjects: " + teacher.getSubjectsExpertiseList());
+                    System.out.println("  Teacher Name: " + teacher.getName() + ", TeacherID: " + teacher.getId()
+                            + ", Subjects Expertise: " + teacher.getSubjectsExpertiseList()+ ", Years of Experience: " + teacher.getYearsOfExperience());
                 }
             } else {
                 System.out.println("  No teachers available.");
@@ -70,7 +74,8 @@ public class SchoolServices {
             System.out.println("Students:");
             if (school.getStudents() != null) {
                 for (Student student : school.getStudents()) {
-                    System.out.println("  Student Name: " + student.getName());
+                    System.out.println("  Student Name: " + student.getName()+"  StudentID: " + student.getId()
+                            +"  Student grade: " + student.getGrade()+"  Student age: " + student.getAge());
 
                     if (student.getCourses() != null) {
                         for (Subject subject : student.getCourses()) {

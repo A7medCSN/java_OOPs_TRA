@@ -6,6 +6,7 @@ import OOP.SchoolSystem.Entities.Student;
 import OOP.SchoolSystem.Entities.School;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -146,5 +147,42 @@ public class LibraryServices {
         if (!studentFound) {
             System.out.println("Student not found. Check if the school or student name is correct.");
         }
+    }
+
+    public static void addBookToSpecificSchool(List<School> schoolSystem) {
+        if (schoolSystem.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
+        System.out.println("Enter the name of the school to add a book:");
+        String schoolName = scanner.nextLine();
+
+        // Find the school by name
+        School selectedSchool = null;
+        for (School school : schoolSystem) {
+            if (school.getName().equalsIgnoreCase(schoolName)) {
+                selectedSchool = school;
+                break;
+            }
+        }
+
+        if (selectedSchool == null) {
+            System.out.println("School not found. Please ensure the school exists.");
+            return;
+        }
+
+        if (selectedSchool.getLibrary() == null) {
+            System.out.println("The selected school does not have a library. Please add a library first.");
+            return;
+        }
+
+        // Add a new book to the selected school's library
+        Book newBook = BookServices.putNewBook();
+        if (selectedSchool.getLibrary().getBooks() == null) {
+            selectedSchool.getLibrary().setBooks(new ArrayList<>());
+        }
+        selectedSchool.getLibrary().getBooks().add(newBook);
+        System.out.println("Book added successfully to the library of " + schoolName);
     }
 }
