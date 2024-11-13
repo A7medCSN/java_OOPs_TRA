@@ -1,7 +1,6 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.Book;
-import OOP.SchoolSystem.Entities.School;
 
 import java.util.ArrayList;
 import java.util.List;
