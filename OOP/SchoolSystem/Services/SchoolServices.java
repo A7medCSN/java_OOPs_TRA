@@ -1,12 +1,14 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.*;
+import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
 
 import java.util.*;
 
 public class SchoolServices {
     static Scanner scanner = new Scanner(System.in);
 
+    static StudentServicesInterface IStudentServices =  new StudentServices();
     public static School createSchool() {
 
         School school = new School();
@@ -17,7 +19,7 @@ public class SchoolServices {
         school.setAddress(scanner.nextLine());
 
         school.setLibrary(LibraryServices.createLibrary());
-        school.setStudents(StudentServices.addStudents());
+        school.setStudents(IStudentServices.addStudents());
         school.setTeachers(TeacherServices.addTeacher());
 
         return school;
