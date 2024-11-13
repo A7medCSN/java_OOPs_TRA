@@ -23,6 +23,12 @@ public class LibraryServices {
     }
 
     public static void bookManagement(List<School> schools) {
+
+        if (schools.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
         while (true) {
             System.out.println("\nBook Management Menu:");
             System.out.println("1 - Assign Book to Student");
@@ -158,7 +164,7 @@ public class LibraryServices {
         System.out.println("Enter the name of the school to add a book:");
         String schoolName = scanner.nextLine();
 
-        // Find the school by name
+
         School selectedSchool = null;
         for (School school : schoolSystem) {
             if (school.getName().equalsIgnoreCase(schoolName)) {
@@ -177,12 +183,53 @@ public class LibraryServices {
             return;
         }
 
-        // Add a new book to the selected school's library
         Book newBook = BookServices.putNewBook();
         if (selectedSchool.getLibrary().getBooks() == null) {
             selectedSchool.getLibrary().setBooks(new ArrayList<>());
         }
         selectedSchool.getLibrary().getBooks().add(newBook);
         System.out.println("Book added successfully to the library of " + schoolName);
+    }
+
+    public static void listAllAvailableBooksInSchoolLibrary(List<School> schoolSystem) {
+        if (schoolSystem.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
+        System.out.println("Enter the name of the school to display available books:");
+        String schoolName = scanner.nextLine();
+
+
+        School selectedSchool = null;
+        for (School school : schoolSystem) {
+            if (school.getName().equalsIgnoreCase(schoolName)) {
+                selectedSchool = school;
+                break;
+            }
+        }
+
+        if (selectedSchool == null) {
+            System.out.println("School not found. Please ensure the school exists.");
+            return;
+        }
+
+        if (selectedSchool.getLibrary() == null) {
+            System.out.println("The selected school does not have a library. Please add a library first.");
+            return;
+        }
+
+        if (selectedSchool.getLibrary() != null && selectedSchool.getLibrary().getBooks() != null) {
+            System.out.println("List of Available Books at Library: ");
+            for (Book book : selectedSchool.getLibrary().getBooks()) {
+                if (book.getAvailable()) {
+                    System.out.println("  Book Title: " + book.getName() + ", BookID: " + book.getId()
+                            + ", Author: " + book.getAuthor() + ", Year of publishing: "
+                            + book.getYearOfPublishing());
+                }
+            }
+        } else {
+            System.out.println("  No books available.");
+        }
     }
 }
