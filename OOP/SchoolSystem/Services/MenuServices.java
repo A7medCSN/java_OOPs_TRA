@@ -1,18 +1,26 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.School;
-import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
+import OOP.SchoolSystem.Interfaces.*;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class MenuServices {
+public class MenuServices implements MenuServicesInterface {
     static StudentServicesInterface IStudentServices =  new StudentServices();
+    static MarkServicesInterface IMarkServices =  new MarkServices();
+    static LibraryServicesInterface ILibraryServices=new LibraryServices();
+    static SchoolServicesInterface ISchoolServices=new SchoolServices();
+    static TeacherServicesInterface ITeacherServices=new TeacherServices();
 
-    public static void showMenu() {
+
+
+
+
+    public void showMenu() {
 
         Scanner scanner = new Scanner(System.in);
-        List<School> schoolSystem = SchoolServices.addSchools();
+        List<School> schoolSystem = ISchoolServices.addSchools();
 
         while (true) {
             System.out.println("\nSchool System Menu:");
@@ -32,31 +40,31 @@ public class MenuServices {
 
             switch (choice) {
                 case 1:
-                    schoolSystem.add(SchoolServices.createSchool());
+                    schoolSystem.add(ISchoolServices.createSchool());
                     break;
                 case 2:
                     IStudentServices.addStudentToSpecificSchool(schoolSystem);
                     break;
                 case 3:
-                    TeacherServices.addTeacherToSpecificSchool(schoolSystem);
+                    ITeacherServices.addTeacherToSpecificSchool(schoolSystem);
                     break;
                 case 4:
-                    LibraryServices.addBookToSpecificSchool(schoolSystem);
+                    ILibraryServices.addBookToSpecificSchool(schoolSystem);
                     break;
                 case 5:
-                    SchoolServices.printAllSchoolDetails(schoolSystem);
+                    ISchoolServices.printAllSchoolDetails(schoolSystem);
                     break;
                 case 6:
-                    MarkServices.retrieveMarks(schoolSystem);
+                    IMarkServices.retrieveMarks(schoolSystem);
                     break;
                 case 7:
-                    MarkServices.calculateAverageMarkForStudent(schoolSystem);
+                    IMarkServices.calculateAverageMarkForStudent(schoolSystem);
                     break;
                 case 8:
-                    LibraryServices.bookManagement(schoolSystem);
+                    ILibraryServices.bookManagement(schoolSystem);
                     break;
                 case 9:
-                    LibraryServices.listAllAvailableBooksInSchoolLibrary(schoolSystem);
+                    ILibraryServices.listAllAvailableBooksInSchoolLibrary(schoolSystem);
                     break;
                 case 10:
                     System.out.println("Exiting system.");
