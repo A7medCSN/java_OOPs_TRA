@@ -4,25 +4,28 @@ import OOP.SchoolSystem.Entities.Library;
 import OOP.SchoolSystem.Entities.Book;
 import OOP.SchoolSystem.Entities.Student;
 import OOP.SchoolSystem.Entities.School;
+import OOP.SchoolSystem.Interfaces.BookServicesInterface;
+import OOP.SchoolSystem.Interfaces.LibraryServicesInterface;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryServices {
+public class LibraryServices implements LibraryServicesInterface {
     static Scanner scanner = new Scanner(System.in);
+    static BookServicesInterface IBookServices=new BookServices();
 
-    public static Library createLibrary() {
+    public Library createLibrary() {
         Library library = new Library();
         System.out.println("Enter library name: ");
         library.setName(scanner.nextLine());
-        library.setBooks(BookServices.addBook());
+        library.setBooks(IBookServices.addBook());
 
         return library;
     }
 
-    public static void bookManagement(List<School> schools) {
+    public void bookManagement(List<School> schools) {
 
         if (schools.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
@@ -59,7 +62,7 @@ public class LibraryServices {
         }
     }
 
-    public static void assignBookToStudent(List<School> schools) {
+    public  void assignBookToStudent(List<School> schools) {
         System.out.println("Enter school name:");
         String schoolName = scanner.nextLine();
         System.out.println("Enter student name:");
@@ -93,7 +96,7 @@ public class LibraryServices {
         }
     }
 
-    public static void returnBook(List<School> schools) {
+    public void returnBook(List<School> schools) {
         System.out.println("Enter school name:");
         String schoolName = scanner.nextLine();
         System.out.println("Enter student name:");
@@ -127,7 +130,7 @@ public class LibraryServices {
         }
     }
 
-    public static void listAssignedBooksForStudent(List<School> schools) {
+    public void listAssignedBooksForStudent(List<School> schools) {
         System.out.println("Enter school name:");
         String schoolName = scanner.nextLine();
         System.out.println("Enter student name:");
@@ -155,7 +158,7 @@ public class LibraryServices {
         }
     }
 
-    public static void addBookToSpecificSchool(List<School> schoolSystem) {
+    public void addBookToSpecificSchool(List<School> schoolSystem) {
         if (schoolSystem.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
             return;
@@ -183,7 +186,7 @@ public class LibraryServices {
             return;
         }
 
-        Book newBook = BookServices.putNewBook();
+        Book newBook = IBookServices.putNewBook();
         if (selectedSchool.getLibrary().getBooks() == null) {
             selectedSchool.getLibrary().setBooks(new ArrayList<>());
         }
@@ -191,7 +194,7 @@ public class LibraryServices {
         System.out.println("Book added successfully to the library of " + schoolName);
     }
 
-    public static void listAllAvailableBooksInSchoolLibrary(List<School> schoolSystem) {
+    public void listAllAvailableBooksInSchoolLibrary(List<School> schoolSystem) {
         if (schoolSystem.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
             return;
@@ -214,22 +217,32 @@ public class LibraryServices {
             return;
         }
 
-        if (selectedSchool.getLibrary() == null) {
-            System.out.println("The selected school does not have a library. Please add a library first.");
-            return;
-        }
 
         if (selectedSchool.getLibrary() != null && selectedSchool.getLibrary().getBooks() != null) {
-            System.out.println("List of Available Books at Library: ");
+            boolean hasAvailableBooks = false;
+
             for (Book book : selectedSchool.getLibrary().getBooks()) {
                 if (book.getAvailable()) {
-                    System.out.println("  Book Title: " + book.getName() + ", BookID: " + book.getId()
-                            + ", Author: " + book.getAuthor() + ", Year of publishing: "
-                            + book.getYearOfPublishing());
+                    hasAvailableBooks = true;
+                    break;
                 }
             }
+
+            if (hasAvailableBooks) {
+                System.out.println("List of Available Books at Library:");
+                for (Book book : selectedSchool.getLibrary().getBooks()) {
+                    if (book.getAvailable()) {
+                        System.out.println("  Book Title: " + book.getName() + ", BookID: " + book.getId()
+                                + ", Author: " + book.getAuthor() + ", Year of publishing: "
+                                + book.getYearOfPublishing());
+                    }
+                }
+            } else {
+                System.out.println("No books available.");
+            }
         } else {
-            System.out.println("  No books available.");
+            System.out.println("No books available.");
         }
+
     }
 }
