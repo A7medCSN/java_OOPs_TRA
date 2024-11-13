@@ -45,6 +45,12 @@ public class MarkServices {
     }
 
     public static void retrieveMarks(List<School> schools) {
+
+        if (schools.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
         Boolean flage = true;
         while (flage) {
             System.out.println("Do you want to retrieve mark for a student? (yes/no)");
@@ -90,6 +96,11 @@ public class MarkServices {
     }
 
     public static void calculateAverageMarkForStudent(List<School> schools) {
+
+        if (schools.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
 
         Boolean flage = true;
         while (flage) {
@@ -142,7 +153,5 @@ public class MarkServices {
             }
         }
     }
-
-
 }
 
