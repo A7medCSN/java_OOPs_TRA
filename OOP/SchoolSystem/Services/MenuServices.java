@@ -1,11 +1,13 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.School;
+import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuServices {
+    static StudentServicesInterface IStudentServices =  new StudentServices();
 
     public static void showMenu() {
 
@@ -33,7 +35,7 @@ public class MenuServices {
                     schoolSystem.add(SchoolServices.createSchool());
                     break;
                 case 2:
-                    StudentServices.addStudentToSpecificSchool(schoolSystem);
+                    IStudentServices.addStudentToSpecificSchool(schoolSystem);
                     break;
                 case 3:
                     TeacherServices.addTeacherToSpecificSchool(schoolSystem);
