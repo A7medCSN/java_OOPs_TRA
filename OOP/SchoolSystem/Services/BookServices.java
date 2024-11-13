@@ -1,15 +1,16 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.Book;
+import OOP.SchoolSystem.Interfaces.BookServicesInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class BookServices {
+public class BookServices implements BookServicesInterface {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Book putNewBook() {
+    public Book putNewBook() {
 
         Book book = new Book();
         System.out.println("Enter book Name:");
@@ -32,7 +33,7 @@ public class BookServices {
 
     }
 
-    public static List<Book> addBook() {
+    public  List<Book> addBook() {
         List<Book> books = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
@@ -41,7 +42,7 @@ public class BookServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if(response.equalsIgnoreCase("yes")) {
-                books.add(BookServices.putNewBook());
+                books.add(putNewBook());
             }
             else {
                 System.out.println("Invalid Input. Please try again.");
