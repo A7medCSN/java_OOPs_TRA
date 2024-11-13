@@ -48,10 +48,10 @@ public class SchoolServices {
         for (School school : schools) {
             System.out.println("\nSchool Name: " + school.getName());
             System.out.println("Address: " + school.getAddress());
-            // Library details
+
             System.out.println("Library name: "+school.getLibrary().getName());
             if (school.getLibrary() != null && school.getLibrary().getBooks() != null) {
-                System.out.println("Available Books at Library: ");
+                System.out.println("List of Books at Library: ");
                 for (Book book : school.getLibrary().getBooks()) {
                     System.out.println("  Book Title: " + book.getName() + ", BookID: " + book.getId()
                             + ", Author: " + book.getAuthor()+ ", Year of publishing: "
@@ -70,6 +70,7 @@ public class SchoolServices {
             } else {
                 System.out.println("  No teachers available.");
             }
+           // System.out.println("for this part we will get the information of the students");
 
             System.out.println("Students:");
             if (school.getStudents() != null) {
