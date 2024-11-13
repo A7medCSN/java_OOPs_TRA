@@ -2,15 +2,16 @@ package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.School;
 import OOP.SchoolSystem.Entities.Student;
+import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class StudentServices {
+public class StudentServices implements StudentServicesInterface {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Student enterNewStudent() {
+    public Student enterNewStudent() {
 
         Student student = new Student();
         System.out.println("Enter Student Name:");
@@ -29,7 +30,8 @@ public class StudentServices {
 
     }
 
-    public static List<Student> addStudents() {
+
+    public List<Student> addStudents() {
         List<Student> students = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
@@ -38,7 +40,7 @@ public class StudentServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                students.add(StudentServices.enterNewStudent());
+                students.add(enterNewStudent());
             } else {
                 System.out.println("Invalid Input. Please try again.");
             }
@@ -47,7 +49,7 @@ public class StudentServices {
         return students;
     }
 
-    public static void addStudentToSpecificSchool(List<School> schools) {
+    public void addStudentToSpecificSchool(List<School> schools) {
 
         if (schools.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
