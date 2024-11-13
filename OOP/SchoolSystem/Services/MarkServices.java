@@ -4,15 +4,16 @@ import OOP.SchoolSystem.Entities.Mark;
 import OOP.SchoolSystem.Entities.School;
 import OOP.SchoolSystem.Entities.Student;
 import OOP.SchoolSystem.Entities.Subject;
+import OOP.SchoolSystem.Interfaces.MarkServicesInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MarkServices {
+public class MarkServices implements MarkServicesInterface {
     static Scanner scanner = new Scanner(System.in);
 
-    public static Mark enterMark() {
+    public Mark enterMark() {
 
         Mark mark = new Mark();
         System.out.println("Enter mark: ");
@@ -26,7 +27,7 @@ public class MarkServices {
 
     }
 
-    public static List<Mark> addMark() {
+    public List<Mark> addMark() {
         List<Mark> marks = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
@@ -35,7 +36,7 @@ public class MarkServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                marks.add(MarkServices.enterMark());
+                marks.add(enterMark());
             } else {
                 System.out.println("Invalid Input. Please try again.");
             }
@@ -44,7 +45,7 @@ public class MarkServices {
         return marks;
     }
 
-    public static void retrieveMarks(List<School> schools) {
+    public void retrieveMarks(List<School> schools) {
 
         if (schools.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
@@ -95,7 +96,7 @@ public class MarkServices {
         }
     }
 
-    public static void calculateAverageMarkForStudent(List<School> schools) {
+    public void calculateAverageMarkForStudent(List<School> schools) {
 
         if (schools.isEmpty()) {
             System.out.println("No schools available. Please add a school first.");
