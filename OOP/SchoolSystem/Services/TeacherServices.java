@@ -54,7 +54,7 @@ public class TeacherServices {
         System.out.println("Enter the name of the school to add a teacher:");
         String schoolName = scanner.nextLine();
 
-        // Find the school by name
+
         School selectedSchool = null;
         for (School school : schoolSystem) {
             if (school.getName().equalsIgnoreCase(schoolName)) {
@@ -68,7 +68,7 @@ public class TeacherServices {
             return;
         }
 
-        // Add a new teacher to the selected school
+
         Teacher newTeacher = enterNewTeacher();
         if (selectedSchool.getTeachers() == null) {
             selectedSchool.setTeachers(new ArrayList<>());
