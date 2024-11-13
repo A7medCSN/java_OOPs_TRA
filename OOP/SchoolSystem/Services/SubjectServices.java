@@ -1,15 +1,20 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.Subject;
+import OOP.SchoolSystem.Interfaces.MarkServicesInterface;
+import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
+import OOP.SchoolSystem.Interfaces.SubjectServicesInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SubjectServices {
+public class SubjectServices implements SubjectServicesInterface {
     static Scanner scanner = new Scanner(System.in);
+    static MarkServicesInterface IMarkServices =  new MarkServices();
 
-    public static Subject enterNewSubject() {
+
+    public Subject enterNewSubject() {
 
         Subject subject = new Subject();
         System.out.println("Enter subject Name");
@@ -25,7 +30,7 @@ public class SubjectServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                subject.setMarks(MarkServices.addMark());
+                subject.setMarks(IMarkServices.addMark());
                 break;
             }
             else {
@@ -35,7 +40,7 @@ public class SubjectServices {
         return subject;
     }
 
-    public static List<Subject> addSubject() {
+    public List<Subject> addSubject() {
         List<Subject> subjects = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
@@ -44,7 +49,7 @@ public class SubjectServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                subjects.add(SubjectServices.enterNewSubject());
+                subjects.add(enterNewSubject());
             }
             else {
                 System.out.println("Invalid Input. Please try again.");
