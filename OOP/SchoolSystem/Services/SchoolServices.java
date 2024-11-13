@@ -1,15 +1,22 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.*;
+import OOP.SchoolSystem.Interfaces.LibraryServicesInterface;
+import OOP.SchoolSystem.Interfaces.SchoolServicesInterface;
 import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
+import OOP.SchoolSystem.Interfaces.TeacherServicesInterface;
 
 import java.util.*;
 
-public class SchoolServices {
+public class SchoolServices implements SchoolServicesInterface {
     static Scanner scanner = new Scanner(System.in);
 
     static StudentServicesInterface IStudentServices =  new StudentServices();
-    public static School createSchool() {
+    static LibraryServicesInterface ILibraryServices=new LibraryServices();
+    static TeacherServicesInterface ITeacherServices=new TeacherServices();
+
+
+    public School createSchool() {
 
         School school = new School();
         System.out.println("Enter School Name:");
@@ -18,14 +25,14 @@ public class SchoolServices {
         System.out.println("Enter School Address:");
         school.setAddress(scanner.nextLine());
 
-        school.setLibrary(LibraryServices.createLibrary());
+        school.setLibrary(ILibraryServices.createLibrary());
         school.setStudents(IStudentServices.addStudents());
-        school.setTeachers(TeacherServices.addTeacher());
+        school.setTeachers(ITeacherServices.addTeacher());
 
         return school;
     }
 
-    public static List<School> addSchools() {
+    public List<School> addSchools() {
         List<School> schools = new ArrayList<>();
         Boolean flag = true;
         while (flag) {
@@ -34,7 +41,7 @@ public class SchoolServices {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                schools.add(SchoolServices.createSchool());
+                schools.add(createSchool());
             }
             else {
                 System.out.println("Invalid Input. Please try again.");
@@ -42,7 +49,7 @@ public class SchoolServices {
         }
         return schools;
     }
-    public static void printAllSchoolDetails(List<School> schools) {
+    public void printAllSchoolDetails(List<School> schools) {
         if (schools.isEmpty()) {
             System.out.println("No schools available.");
             return;
