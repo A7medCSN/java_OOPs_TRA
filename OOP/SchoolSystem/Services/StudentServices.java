@@ -48,10 +48,15 @@ public class StudentServices {
     }
 
     public static void addStudentToSpecificSchool(List<School> schools) {
+
+        if (schools.isEmpty()) {
+            System.out.println("No schools available. Please add a school first.");
+            return;
+        }
+
         System.out.println("Enter the school name to add a new student:");
         String schoolName = scanner.nextLine();
 
-        // Find the target school by name
         School targetSchool = null;
         for (School school : schools) {
             if (school.getName().equalsIgnoreCase(schoolName)) {
@@ -65,10 +70,9 @@ public class StudentServices {
             return;
         }
 
-        // Enter new student details and add to the target school's student list
         Student newStudent = enterNewStudent();
         if (targetSchool.getStudents() == null) {
-            targetSchool.setStudents(new ArrayList<>()); // Initialize if students list is null
+            targetSchool.setStudents(new ArrayList<>());
         }
         targetSchool.getStudents().add(newStudent);
 
