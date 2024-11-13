@@ -1,15 +1,17 @@
 package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.School;
-import OOP.SchoolSystem.Services.SchoolServices;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuServices {
+
     public static void showMenu() {
+
         Scanner scanner = new Scanner(System.in);
         List<School> schoolSystem = SchoolServices.addSchools();
+
         while (true) {
             System.out.println("\nSchool System Menu:");
             System.out.println("1 - Add New School");
@@ -20,7 +22,8 @@ public class MenuServices {
             System.out.println("6 - Retrieve Marks for Student in Subject");
             System.out.println("7 - Calculate Average Marks for Student");
             System.out.println("8 - Book Management");
-            System.out.println("9 - Exit");
+            System.out.println("9 - List All Available Books In Specific School Library");
+            System.out.println("10 - Exit");
             System.out.print("Choose an option (1-9): ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -51,6 +54,9 @@ public class MenuServices {
                     LibraryServices.bookManagement(schoolSystem);
                     break;
                 case 9:
+                    LibraryServices.listAllAvailableBooksInSchoolLibrary(schoolSystem);
+                    break;
+                case 10:
                     System.out.println("Exiting system.");
                     scanner.close();
                     return;
