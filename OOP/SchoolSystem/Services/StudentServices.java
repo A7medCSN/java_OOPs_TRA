@@ -3,6 +3,7 @@ package OOP.SchoolSystem.Services;
 import OOP.SchoolSystem.Entities.School;
 import OOP.SchoolSystem.Entities.Student;
 import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
+import OOP.SchoolSystem.Interfaces.SubjectServicesInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Scanner;
 
 public class StudentServices implements StudentServicesInterface {
     static Scanner scanner = new Scanner(System.in);
+    static SubjectServicesInterface ISubjectServices=new SubjectServices();
+
 
     public Student enterNewStudent() {
 
@@ -24,7 +27,7 @@ public class StudentServices implements StudentServicesInterface {
         student.setAge(scanner.nextShort());
         scanner.nextLine();
 
-        student.setCourses(SubjectServices.addSubject());
+        student.setCourses(ISubjectServices.addSubject());
 
         return student;
 
