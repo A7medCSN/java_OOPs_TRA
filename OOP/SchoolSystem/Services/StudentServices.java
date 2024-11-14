@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class StudentServices implements StudentServicesInterface {
     static Scanner scanner = new Scanner(System.in);
-    static SubjectServicesInterface ISubjectServices=new SubjectServices();
+    static SubjectServicesInterface subjectServicesInterface =new SubjectServices();
 
 
     public Student enterNewStudent() {
@@ -27,7 +27,7 @@ public class StudentServices implements StudentServicesInterface {
         student.setAge(scanner.nextShort());
         scanner.nextLine();
 
-        student.setCourses(ISubjectServices.addSubject());
+        student.setCourses(subjectServicesInterface.addSubject());
 
         return student;
 

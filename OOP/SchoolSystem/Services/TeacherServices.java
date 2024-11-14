@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class TeacherServices implements TeacherServicesInterface {
     static Scanner scanner = new Scanner(System.in);
-    static SubjectServicesInterface ISubjectServices=new SubjectServices();
+    static SubjectServicesInterface subjectServicesInterface =new SubjectServices();
 
 
 
@@ -26,7 +26,7 @@ public class TeacherServices implements TeacherServicesInterface {
         teacher.setYearsOfExperience(scanner.nextShort());
         scanner.nextLine();
 
-        teacher.setSubjectsExpertiseList(ISubjectServices.addSubject());
+        teacher.setSubjectsExpertiseList(subjectServicesInterface.addSubject());
 
         return teacher;
 

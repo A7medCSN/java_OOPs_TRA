@@ -11,9 +11,9 @@ import java.util.*;
 public class SchoolServices implements SchoolServicesInterface {
     static Scanner scanner = new Scanner(System.in);
 
-    static StudentServicesInterface IStudentServices =  new StudentServices();
-    static LibraryServicesInterface ILibraryServices=new LibraryServices();
-    static TeacherServicesInterface ITeacherServices=new TeacherServices();
+    static StudentServicesInterface studentServicesInterface =  new StudentServices();
+    static LibraryServicesInterface libraryServicesInterface =new LibraryServices();
+    static TeacherServicesInterface teacherServicesInterface =new TeacherServices();
 
 
     public School createSchool() {
@@ -25,9 +25,9 @@ public class SchoolServices implements SchoolServicesInterface {
         System.out.println("Enter School Address:");
         school.setAddress(scanner.nextLine());
 
-        school.setLibrary(ILibraryServices.createLibrary());
-        school.setStudents(IStudentServices.addStudents());
-        school.setTeachers(ITeacherServices.addTeacher());
+        school.setLibrary(libraryServicesInterface.createLibrary());
+        school.setStudents(studentServicesInterface.addStudents());
+        school.setTeachers(teacherServicesInterface.addTeacher());
 
         return school;
     }

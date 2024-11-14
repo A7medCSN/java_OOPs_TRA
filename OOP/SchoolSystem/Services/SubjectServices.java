@@ -2,7 +2,6 @@ package OOP.SchoolSystem.Services;
 
 import OOP.SchoolSystem.Entities.Subject;
 import OOP.SchoolSystem.Interfaces.MarkServicesInterface;
-import OOP.SchoolSystem.Interfaces.StudentServicesInterface;
 import OOP.SchoolSystem.Interfaces.SubjectServicesInterface;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.Scanner;
 
 public class SubjectServices implements SubjectServicesInterface {
     static Scanner scanner = new Scanner(System.in);
-    static MarkServicesInterface IMarkServices =  new MarkServices();
+    static MarkServicesInterface markServicesInterface =  new MarkServices();
 
 
     public Subject enterNewSubject() {
@@ -30,7 +29,7 @@ public class SubjectServices implements SubjectServicesInterface {
             if (response.equalsIgnoreCase("no")) {
                 flag = false;
             } else if (response.equalsIgnoreCase("yes")) {
-                subject.setMarks(IMarkServices.addMark());
+                subject.setMarks(markServicesInterface.addMark());
                 break;
             }
             else {

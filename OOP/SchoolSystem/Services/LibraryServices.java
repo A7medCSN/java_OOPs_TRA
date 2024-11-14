@@ -14,13 +14,16 @@ import java.util.Scanner;
 
 public class LibraryServices implements LibraryServicesInterface {
     static Scanner scanner = new Scanner(System.in);
-    static BookServicesInterface IBookServices=new BookServices();
+
+    //we add new instance (bookServicesInterface)
+    // so that any other instance of this class can use interface functions
+    static BookServicesInterface bookServicesInterface = new BookServices();
 
     public Library createLibrary() {
         Library library = new Library();
         System.out.println("Enter library name: ");
         library.setName(scanner.nextLine());
-        library.setBooks(IBookServices.addBook());
+        library.setBooks(bookServicesInterface.addBook());
 
         return library;
     }
@@ -62,7 +65,7 @@ public class LibraryServices implements LibraryServicesInterface {
         }
     }
 
-    public  void assignBookToStudent(List<School> schools) {
+    public void assignBookToStudent(List<School> schools) {
         System.out.println("Enter school name:");
         String schoolName = scanner.nextLine();
         System.out.println("Enter student name:");
@@ -186,7 +189,7 @@ public class LibraryServices implements LibraryServicesInterface {
             return;
         }
 
-        Book newBook = IBookServices.putNewBook();
+        Book newBook = bookServicesInterface.putNewBook();
         if (selectedSchool.getLibrary().getBooks() == null) {
             selectedSchool.getLibrary().setBooks(new ArrayList<>());
         }
