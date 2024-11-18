@@ -4,6 +4,7 @@ public class PhysicsData {
 
     private Float mass;
     private Float acceleration;
+    private Float volume;
 
     private MotionData motionData;
 
@@ -12,6 +13,7 @@ public class PhysicsData {
         return "PhysicsData{" +
                 "mass=" + mass +
                 ", acceleration=" + acceleration +
+                ", volume=" + volume +
                 ", motionData=" + motionData +
                 '}';
     }
@@ -32,6 +34,14 @@ public class PhysicsData {
         this.acceleration = acceleration;
     }
 
+    public Float getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Float volume) {
+        this.volume = volume;
+    }
+
     public MotionData getMotionData() {
         return motionData;
     }
@@ -39,4 +49,5 @@ public class PhysicsData {
     public void setMotionData(MotionData motionData) {
         this.motionData = motionData;
     }
+
 }

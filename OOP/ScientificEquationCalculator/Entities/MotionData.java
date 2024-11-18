@@ -41,11 +41,11 @@ public class MotionData {
         this.time = time;
     }
 
-    public BaseData getBasedata() {
+    public BaseData getBaseData() {
         return basedata;
     }
 
-    public void setBasedata(BaseData basedata) {
+    public void setBaseData(BaseData basedata) {
         this.basedata = basedata;
     }
 }
