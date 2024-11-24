@@ -2,7 +2,7 @@ package OOP.CinemaSystem.Entities;
 
 import java.util.List;
 
-public class Cinema extends Base{
+public class Cinema extends Base {
 
     private String name;
     private String location;

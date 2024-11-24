@@ -1,6 +1,6 @@
 package OOP.CinemaSystem.Entities;
 
-public class Employee extends Base{
+public class Employee extends Base {
 
     private String name;
     private String designation;

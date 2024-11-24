@@ -1,6 +1,6 @@
 package OOP.CinemaSystem.Entities;
 
-public class Movie extends Base{
+public class Movie extends Base {
 
     private String name;
     private Short duration;

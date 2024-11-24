@@ -3,7 +3,7 @@ package OOP.CinemaSystem.Entities;
 
 import java.util.Date;
 
-public class Ticket extends Base{
+public class Ticket extends Base {
 
     private Hall hall;
     private Seat seat;

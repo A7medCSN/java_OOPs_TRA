@@ -1,6 +1,6 @@
 package OOP.CinemaSystem.Entities;
 
-public class Hall extends Base{
+public class Hall extends Base {
 
     private Short capacity;
     private String type;

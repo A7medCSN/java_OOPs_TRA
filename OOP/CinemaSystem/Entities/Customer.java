@@ -1,6 +1,6 @@
 package OOP.CinemaSystem.Entities;
 
-public class Customer extends Base{
+public class Customer extends Base {
 
     private String phoneNumber;
     private String name;

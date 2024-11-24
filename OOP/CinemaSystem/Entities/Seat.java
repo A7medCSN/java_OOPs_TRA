@@ -1,6 +1,6 @@
 package OOP.CinemaSystem.Entities;
 
-public class Seat extends Base{
+public class Seat extends Base {
 
     private String type;
     private Short seatNumber;
